@@ -54,4 +54,30 @@ public class CustomerRepository {
 
     }
 
+    public List<CustomerEntity> getAllCustomersOrderByNameDesc() {
+        String hql = "FROM CustomerEntity ORDER BY name DESC";
+        Query query = session.createQuery(hql);
+        List<CustomerEntity> customerEntities = query.list();
+        return customerEntities;
+    }
+
+    // SELECT count(*), max(salary), min(salary), avg(salary), sum(salary) from Customer;
+    public Object[] getCutsomerSummery() {
+        String hql = "SELECT count(id), max(salary), min(salary), avg(salary), sum(salary) FROM CustomerEntity";
+        Query query = session.createQuery(hql);
+        Object[] data = (Object[]) query.uniqueResult();
+        return data;
+    }
+
+    //SELECT province, count(CustID) AS count,  sum(salary) AS total, avg(salary) AS average FROM Customer GROUP BY province;
+
+    public List<Object[]> getCutsomerSummeryByProvince() {
+        String hql = "SELECT province, count(id), max(salary), min(salary), avg(salary), sum(salary) FROM CustomerEntity GROUP BY province";
+        Query query = session.createQuery(hql);
+        List<Object[]> data = query.list();
+        return data;
+    }
+
+
+
 }
