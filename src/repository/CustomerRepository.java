@@ -17,10 +17,16 @@ public class CustomerRepository {
     }
 
     public List<CustomerEntity> getAllCustomers(){
-
         String hql = "FROM CustomerEntity";
         Query query = session.createQuery(hql);
         List<CustomerEntity> customerEntities = query.list();
         return customerEntities;
+    }
+
+    public List<Object[]> getAllCustomerNativeQuery(){
+        String sql = "SELECT * FROM Customer";
+        Query query = session.createSQLQuery(sql);
+        List<Object[]> data = query.list();
+        return data;
     }
 }
