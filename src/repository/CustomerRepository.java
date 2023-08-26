@@ -1,11 +1,13 @@
 package repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import entity.CustomerEntity;
+import entity.OrderEntity;
 import util.SessionFactoryConfiguration;
 
 public class CustomerRepository {
@@ -78,6 +80,14 @@ public class CustomerRepository {
         return data;
     }
 
-
+    public List<OrderEntity> getOrdersBeforeDateAndProvince(Date date, String province){
+        String hql = "SELECT ord FROM CustomerEntity as cust inner join cust.orderEntities as ord WHERE ord.date < :date AND cust.province=:province";
+        Query query = session.createQuery(hql);
+        query.setParameter("date", date);
+        query.setParameter("province", province);
+        List<OrderEntity> orderEntities = query.list();
+        return orderEntities;
+        
+    }
 
 }
