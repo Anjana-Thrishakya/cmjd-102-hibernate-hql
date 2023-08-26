@@ -18,9 +18,24 @@ public class App {
 
         //////////////////////////////////////////////////////////////////////////////////////////
 
-        List<Object[]> data = customerRepository.getAllCustomerNativeQuery();
-        for (Object[] row : data) {
-            System.out.println(Arrays.toString(row));
-        }
+        // List<Object[]> data = customerRepository.getAllCustomerNativeQuery();
+        // for (Object[] row : data) {
+        //     System.out.println(Arrays.toString(row));
+        // }
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+
+        // List<Object[]> data = customerRepository.getAllCustomerNameAndDob();
+        // for (Object[] row : data) {
+        //     System.out.println(Arrays.toString(row));
+        // }
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        // CustomerEntity customerEntity = customerRepository.findCustomerById("C001");
+        // System.out.println(customerEntity.toString());
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        CustomerEntity customerEntity = customerRepository.findCustomerByIdUsingNamedParameters("C001");
+        System.out.println(customerEntity.toString());
     }
 }
